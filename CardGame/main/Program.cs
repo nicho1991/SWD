@@ -9,8 +9,10 @@ namespace main
             Game spil = new Game();
             Player spiller1 = new Player("spiller1");
             Player spiller2 = new Player("spiller2");
+            Player spillerWeak = new WeakPlayer("weak");
             spil.AcceptPlayer(spiller2);
             spil.AcceptPlayer(spiller1);
+            spil.AcceptPlayer(spillerWeak);
 
             spil.DealCards(5);
 

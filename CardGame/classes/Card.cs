@@ -10,7 +10,7 @@ namespace classes
     {
         public int Color { get; }
         public int Number { get; }
-
+            
         public Card(int i, int j)
         {
             Color = i;

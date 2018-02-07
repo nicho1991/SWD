@@ -8,7 +8,7 @@ namespace classes
 {
     public class Player
     {
-        public string Name { get; }
+        public string Name { get; set; }
         public List<Card> cards = new List<Card>();
 
         public Player(string name)
@@ -26,18 +26,36 @@ namespace classes
             return total;
         }
 
-        public void Receive(Card deal)
+        public virtual void Receive(Card deal)
         {
             cards.Add(deal);
         }
 
         public void showHand()
         {
-            Console.WriteLine(Name + "has the following cards: ");
+            Console.WriteLine(Name + " has the following cards: ");
             foreach (var card in cards)
             {
                 Console.WriteLine("color : " + card.Color + " number: " + card.Number);
             }
+        }
+    }
+
+    public class WeakPlayer : Player
+    {
+ 
+
+        public WeakPlayer(string name) : base(name)
+        {
+            Name = name + "weak";
+        }
+
+        public override void Receive(Card deal)
+        {
+            if (cards.Count > 2)
+                return;
+            cards.Add(deal);
+
         }
     }
 }
