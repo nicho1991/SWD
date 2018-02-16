@@ -1,0 +1,8 @@
+class reportGenerator
+the base class. reponsebility only to setup methods
+
+class nameFirst : reportGenerator
+prints out from employeeDb with the name first report
+
+class salaryFirst: reportGenerator
+prints out employeeDb with the salary first.
