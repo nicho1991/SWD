@@ -1,0 +1,40 @@
+﻿<Window x:Class="BMICalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="BMI Calculator" Height="195.098" Width="220.098"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=BmiViewModel}">
+        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <UniformGrid Grid.Row="0"  Rows="1" Columns="3">
+            <Label Content="Weight:"/>
+            <TextBox Text="{Binding Weight}" />
+            <Label Content="Kg"/>
+        </UniformGrid>
+
+        <UniformGrid Grid.Row="1"  Rows="1" Columns="3">
+            <Label Content="Height"/>
+            <TextBox Text="{Binding Height}"/>
+            <Label Content="m"/>
+        </UniformGrid>
+
+        <UniformGrid Grid.Row="2"  Rows="1" Columns="3">
+            <Label Content="BMI:"/>
+            <TextBox Text="{Binding BMI, Mode=OneWay}"/>
+        </UniformGrid>
+
+        <Button Grid.Row="3" 
+                Command="{Binding CalcBMICommand , Mode=OneTime}" 
+                Content="CalculateBMI"/>
+
+    </Grid>
+</Window>
