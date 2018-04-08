@@ -9,20 +9,17 @@ namespace Exercise2
             var flash = new Flashlight();
 
             while (true)
-            {
                 if (Console.ReadKey().Key == ConsoleKey.A)
                     flash.Power();
 
                 else if (Console.ReadKey().Key == ConsoleKey.B)
                     flash.Mode();
-            }
-
         }
     }
 
     public class Flashlight
     {
-        private FlashLightState _state = new On();
+        private FlashLightState _state = new Solid();
 
         public void Power()
         {
@@ -66,32 +63,34 @@ namespace Exercise2
         void HandleMode(Flashlight flashlight);
     }
 
-    public class On : FlashLightState
+    public abstract class on : FlashLightState
     {
-        public void HandlePower(Flashlight FlashLight)
+        public virtual void HandlePower(Flashlight FlashLight)
         {
             FlashLight.SetFlashLightState(new Off());
-            FlashLight.LightOn();
+            FlashLight.LightOff();
         }
 
-        public void HandleMode(Flashlight flashlight)
+        public virtual void HandleMode(Flashlight flashlight)
+        {
+            // up to the inherited
+        }
+    }
+
+    public class Solid : on
+    {
+        public override void HandleMode(Flashlight flashlight)
         {
             flashlight.SetFlashLightState(new Flashing());
             flashlight.SolidOn();
         }
     }
 
-    public class Flashing : FlashLightState
+    public class Flashing : on
     {
-        public void HandlePower(Flashlight FlashLight)
+        public override void HandleMode(Flashlight flashlight)
         {
-            FlashLight.SetFlashLightState(new Off());
-            FlashLight.LightOn();
-        }
-
-        public void HandleMode(Flashlight flashlight)
-        {
-            flashlight.SetFlashLightState(new On());
+            flashlight.SetFlashLightState(new Solid());
             flashlight.FlashingOn();
         }
     }
@@ -100,13 +99,12 @@ namespace Exercise2
     {
         public void HandlePower(Flashlight FlashLight)
         {
-            FlashLight.SetFlashLightState(new On());
-            FlashLight.LightOff();
+            FlashLight.SetFlashLightState(new Solid());
+            FlashLight.LightOn();
         }
 
         public virtual void HandleMode(Flashlight flashlight)
         {
-            
         }
     }
 }
